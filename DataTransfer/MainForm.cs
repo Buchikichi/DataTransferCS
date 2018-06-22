@@ -1,7 +1,7 @@
 ﻿using DataTransfer.Properties;
+using DataTransfer.Util;
 using Npgsql;
 using System;
-using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -10,38 +10,28 @@ namespace DataTransfer
     public partial class MainForm : Form
     {
         #region Events
+        private void SetStatusLabel(string text)
+        {
+            StatusLabel.Text = text;
+            StatusBar.Invalidate();
+        }
+
         private void TestSourceButton_Click(object sender, EventArgs e)
         {
-            var builder = new NpgsqlConnectionStringBuilder
+            SetStatusLabel("Connect:" + SourceHostTextBox.Text);
+            using (var srcConn = new NpgsqlConnection(SourceConnectionString))
             {
-                Host = Settings.Default.SourceHostName,
-                Port = (int)Settings.Default.SourcePort,
-                Database = Settings.Default.SourceSchema,
-                Username = Settings.Default.SourceUser,
-                Password = Settings.Default.SourcePassword,
-            };
-            if (SourceTlsCheckBox.Checked)
-            {
-                builder.SslMode = SslMode.Require;
-                builder.TrustServerCertificate = true;
-            }
-            var query = "SELECT * FROM pg_tables WHERE tableowner = CURRENT_USER";
+                srcConn.Open();
+                SetStatusLabel("Connected:" + SourceHostTextBox.Text);
 
-            using (var con = new NpgsqlConnection(builder.ToString()))
-            {
-                con.Open();
-                Debug.Print("connected.");
+                var srcTables = PgUtils.ListTables(srcConn);
 
-                var cmd = new NpgsqlCommand(query, con);
-                var dataReader = cmd.ExecuteReader();
-
-                foreach (IDataRecord row in dataReader)
+                foreach (var name in srcTables)
                 {
-                    var name = row[1];
-
                     Debug.Print("name:" + name);
                 }
             }
+            SetStatusLabel("Done.");
         }
         #endregion
 
@@ -55,6 +45,29 @@ namespace DataTransfer
         {
             InitializeComponent();
             Initialize();
+        }
+        #endregion
+
+        #region Attributes
+        private string SourceConnectionString
+        {
+            get
+            {
+                var builder = new NpgsqlConnectionStringBuilder
+                {
+                    Host = Settings.Default.SourceHostName,
+                    Port = (int)Settings.Default.SourcePort,
+                    Database = Settings.Default.SourceSchema,
+                    Username = Settings.Default.SourceUser,
+                    Password = Settings.Default.SourcePassword,
+                };
+                if (SourceTlsCheckBox.Checked)
+                {
+                    builder.SslMode = SslMode.Require;
+                    builder.TrustServerCertificate = true;
+                }
+                return builder.ToString();
+            }
         }
         #endregion
     }
