@@ -94,5 +94,77 @@ namespace DataTransfer.Properties {
                 this["SourceSchema"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DestinationHostName {
+            get {
+                return ((string)(this["DestinationHostName"]));
+            }
+            set {
+                this["DestinationHostName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5432")]
+        public decimal DestinationPort {
+            get {
+                return ((decimal)(this["DestinationPort"]));
+            }
+            set {
+                this["DestinationPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DestinationTls {
+            get {
+                return ((bool)(this["DestinationTls"]));
+            }
+            set {
+                this["DestinationTls"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DestinationSchema {
+            get {
+                return ((string)(this["DestinationSchema"]));
+            }
+            set {
+                this["DestinationSchema"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DestinationUser {
+            get {
+                return ((string)(this["DestinationUser"]));
+            }
+            set {
+                this["DestinationUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DestinationPassword {
+            get {
+                return ((string)(this["DestinationPassword"]));
+            }
+            set {
+                this["DestinationPassword"] = value;
+            }
+        }
     }
 }

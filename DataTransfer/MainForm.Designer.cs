@@ -29,22 +29,35 @@
         private void InitializeComponent()
         {
             this.StatusBar = new System.Windows.Forms.StatusStrip();
+            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.sourceGroupBox = new System.Windows.Forms.GroupBox();
+            this.TestSourceButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.DestinationGroupBox = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TestDestinationButton = new System.Windows.Forms.Button();
+            this.DestinationSchemaTextBox = new System.Windows.Forms.TextBox();
+            this.DestinationTlsCheckBox = new System.Windows.Forms.CheckBox();
+            this.DestinationPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.DestinationUserTextBox = new System.Windows.Forms.TextBox();
+            this.DestinationHostTextBox = new System.Windows.Forms.TextBox();
+            this.DestinationPort = new System.Windows.Forms.NumericUpDown();
             this.SourceSchemaTextBox = new System.Windows.Forms.TextBox();
             this.SourceTlsCheckBox = new System.Windows.Forms.CheckBox();
             this.SourcePasswordTextBox = new System.Windows.Forms.TextBox();
             this.SourceUserTextBox = new System.Windows.Forms.TextBox();
-            this.TestSourceButton = new System.Windows.Forms.Button();
             this.SourcePort = new System.Windows.Forms.NumericUpDown();
             this.SourceHostTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.StatusBar.SuspendLayout();
             this.sourceGroupBox.SuspendLayout();
+            this.DestinationGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DestinationPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SourcePort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +72,22 @@
             this.StatusBar.Size = new System.Drawing.Size(784, 22);
             this.StatusBar.TabIndex = 0;
             this.StatusBar.Text = "statusStrip1";
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(667, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             // 
             // sourceGroupBox
             // 
@@ -80,6 +109,174 @@
             this.sourceGroupBox.TabIndex = 1;
             this.sourceGroupBox.TabStop = false;
             this.sourceGroupBox.Text = "Source";
+            // 
+            // TestSourceButton
+            // 
+            this.TestSourceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TestSourceButton.Location = new System.Drawing.Point(674, 89);
+            this.TestSourceButton.Name = "TestSourceButton";
+            this.TestSourceButton.Size = new System.Drawing.Size(80, 26);
+            this.TestSourceButton.TabIndex = 4;
+            this.TestSourceButton.Text = "Test";
+            this.TestSourceButton.UseVisualStyleBackColor = true;
+            this.TestSourceButton.Click += new System.EventHandler(this.TestSourceButton_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 92);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 19);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "User:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 19);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Schema:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 19);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Host:";
+            // 
+            // DestinationGroupBox
+            // 
+            this.DestinationGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationGroupBox.Controls.Add(this.TestDestinationButton);
+            this.DestinationGroupBox.Controls.Add(this.DestinationSchemaTextBox);
+            this.DestinationGroupBox.Controls.Add(this.label4);
+            this.DestinationGroupBox.Controls.Add(this.DestinationTlsCheckBox);
+            this.DestinationGroupBox.Controls.Add(this.label5);
+            this.DestinationGroupBox.Controls.Add(this.DestinationPasswordTextBox);
+            this.DestinationGroupBox.Controls.Add(this.label6);
+            this.DestinationGroupBox.Controls.Add(this.DestinationUserTextBox);
+            this.DestinationGroupBox.Controls.Add(this.DestinationHostTextBox);
+            this.DestinationGroupBox.Controls.Add(this.DestinationPort);
+            this.DestinationGroupBox.Location = new System.Drawing.Point(12, 143);
+            this.DestinationGroupBox.Name = "DestinationGroupBox";
+            this.DestinationGroupBox.Size = new System.Drawing.Size(760, 151);
+            this.DestinationGroupBox.TabIndex = 2;
+            this.DestinationGroupBox.TabStop = false;
+            this.DestinationGroupBox.Text = "Destination";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 19);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Host:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 60);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 19);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Schema:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 93);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 19);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "User:";
+            // 
+            // TestDestinationButton
+            // 
+            this.TestDestinationButton.Location = new System.Drawing.Point(674, 88);
+            this.TestDestinationButton.Name = "TestDestinationButton";
+            this.TestDestinationButton.Size = new System.Drawing.Size(80, 26);
+            this.TestDestinationButton.TabIndex = 10;
+            this.TestDestinationButton.Text = "Test";
+            this.TestDestinationButton.UseVisualStyleBackColor = true;
+            this.TestDestinationButton.Click += new System.EventHandler(this.TestDestinationButton_Click);
+            // 
+            // DestinationSchemaTextBox
+            // 
+            this.DestinationSchemaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "DestinationSchema", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DestinationSchemaTextBox.Location = new System.Drawing.Point(80, 57);
+            this.DestinationSchemaTextBox.Name = "DestinationSchemaTextBox";
+            this.DestinationSchemaTextBox.Size = new System.Drawing.Size(180, 26);
+            this.DestinationSchemaTextBox.TabIndex = 9;
+            this.DestinationSchemaTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationSchema;
+            // 
+            // DestinationTlsCheckBox
+            // 
+            this.DestinationTlsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationTlsCheckBox.AutoSize = true;
+            this.DestinationTlsCheckBox.Checked = global::DataTransfer.Properties.Settings.Default.DestinationTls;
+            this.DestinationTlsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DataTransfer.Properties.Settings.Default, "DestinationTls", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DestinationTlsCheckBox.Location = new System.Drawing.Point(694, 27);
+            this.DestinationTlsCheckBox.Name = "DestinationTlsCheckBox";
+            this.DestinationTlsCheckBox.Size = new System.Drawing.Size(60, 23);
+            this.DestinationTlsCheckBox.TabIndex = 7;
+            this.DestinationTlsCheckBox.Text = "TLS";
+            this.DestinationTlsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // DestinationPasswordTextBox
+            // 
+            this.DestinationPasswordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "DestinationPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DestinationPasswordTextBox.Location = new System.Drawing.Point(266, 89);
+            this.DestinationPasswordTextBox.Name = "DestinationPasswordTextBox";
+            this.DestinationPasswordTextBox.Size = new System.Drawing.Size(402, 26);
+            this.DestinationPasswordTextBox.TabIndex = 6;
+            this.DestinationPasswordTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationPassword;
+            // 
+            // DestinationUserTextBox
+            // 
+            this.DestinationUserTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "DestinationUser", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DestinationUserTextBox.Location = new System.Drawing.Point(80, 89);
+            this.DestinationUserTextBox.Name = "DestinationUserTextBox";
+            this.DestinationUserTextBox.Size = new System.Drawing.Size(180, 26);
+            this.DestinationUserTextBox.TabIndex = 5;
+            this.DestinationUserTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationUser;
+            // 
+            // DestinationHostTextBox
+            // 
+            this.DestinationHostTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationHostTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "DestinationHostName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DestinationHostTextBox.Location = new System.Drawing.Point(80, 25);
+            this.DestinationHostTextBox.Name = "DestinationHostTextBox";
+            this.DestinationHostTextBox.Size = new System.Drawing.Size(522, 26);
+            this.DestinationHostTextBox.TabIndex = 2;
+            this.DestinationHostTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationHostName;
+            // 
+            // DestinationPort
+            // 
+            this.DestinationPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationPort.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::DataTransfer.Properties.Settings.Default, "DestinationPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DestinationPort.Location = new System.Drawing.Point(608, 25);
+            this.DestinationPort.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.DestinationPort.Minimum = new decimal(new int[] {
+            22,
+            0,
+            0,
+            0});
+            this.DestinationPort.Name = "DestinationPort";
+            this.DestinationPort.Size = new System.Drawing.Size(80, 26);
+            this.DestinationPort.TabIndex = 3;
+            this.DestinationPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.DestinationPort.Value = global::DataTransfer.Properties.Settings.Default.DestinationPort;
             // 
             // SourceSchemaTextBox
             // 
@@ -121,17 +318,6 @@
             this.SourceUserTextBox.TabIndex = 5;
             this.SourceUserTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceUser;
             // 
-            // TestSourceButton
-            // 
-            this.TestSourceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestSourceButton.Location = new System.Drawing.Point(674, 89);
-            this.TestSourceButton.Name = "TestSourceButton";
-            this.TestSourceButton.Size = new System.Drawing.Size(80, 26);
-            this.TestSourceButton.TabIndex = 4;
-            this.TestSourceButton.Text = "Test";
-            this.TestSourceButton.UseVisualStyleBackColor = true;
-            this.TestSourceButton.Click += new System.EventHandler(this.TestSourceButton_Click);
-            // 
             // SourcePort
             // 
             this.SourcePort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -164,54 +350,12 @@
             this.SourceHostTextBox.TabIndex = 2;
             this.SourceHostTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceHostName;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 19);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "User:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 19);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Schema:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 19);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Host:";
-            // 
-            // StatusLabel
-            // 
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(636, 17);
-            this.toolStripStatusLabel1.Spring = true;
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.DestinationGroupBox);
             this.Controls.Add(this.sourceGroupBox);
             this.Controls.Add(this.StatusBar);
             this.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -224,6 +368,9 @@
             this.StatusBar.PerformLayout();
             this.sourceGroupBox.ResumeLayout(false);
             this.sourceGroupBox.PerformLayout();
+            this.DestinationGroupBox.ResumeLayout(false);
+            this.DestinationGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DestinationPort)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SourcePort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -247,6 +394,17 @@
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.GroupBox DestinationGroupBox;
+        private System.Windows.Forms.Button TestDestinationButton;
+        private System.Windows.Forms.TextBox DestinationSchemaTextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox DestinationTlsCheckBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox DestinationPasswordTextBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox DestinationUserTextBox;
+        private System.Windows.Forms.TextBox DestinationHostTextBox;
+        private System.Windows.Forms.NumericUpDown DestinationPort;
     }
 }
 

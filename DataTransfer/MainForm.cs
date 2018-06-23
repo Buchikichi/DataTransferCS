@@ -16,13 +16,13 @@ namespace DataTransfer
             StatusBar.Invalidate();
         }
 
-        private void TestSourceButton_Click(object sender, EventArgs e)
+        private bool TestConnection(string connectionString)
         {
-            SetStatusLabel("Connect:" + SourceHostTextBox.Text);
-            using (var srcConn = new NpgsqlConnection(SourceConnectionString))
+            SetStatusLabel("Connecting");
+            using (var srcConn = new NpgsqlConnection(connectionString))
             {
                 srcConn.Open();
-                SetStatusLabel("Connected:" + SourceHostTextBox.Text);
+                SetStatusLabel("Connected");
 
                 var srcTables = PgUtils.ListTables(srcConn);
 
@@ -32,6 +32,17 @@ namespace DataTransfer
                 }
             }
             SetStatusLabel("Done.");
+            return true;
+        }
+
+        private void TestSourceButton_Click(object sender, EventArgs e)
+        {
+            TestConnection(SourceConnectionString);
+        }
+
+        private void TestDestinationButton_Click(object sender, EventArgs e)
+        {
+            TestConnection(DestinationConnectionString);
         }
         #endregion
 
@@ -62,6 +73,27 @@ namespace DataTransfer
                     Password = Settings.Default.SourcePassword,
                 };
                 if (SourceTlsCheckBox.Checked)
+                {
+                    builder.SslMode = SslMode.Require;
+                    builder.TrustServerCertificate = true;
+                }
+                return builder.ToString();
+            }
+        }
+
+        private string DestinationConnectionString
+        {
+            get
+            {
+                var builder = new NpgsqlConnectionStringBuilder
+                {
+                    Host = Settings.Default.DestinationHostName,
+                    Port = (int)Settings.Default.DestinationPort,
+                    Database = Settings.Default.DestinationSchema,
+                    Username = Settings.Default.DestinationUser,
+                    Password = Settings.Default.DestinationPassword,
+                };
+                if (DestinationTlsCheckBox.Checked)
                 {
                     builder.SslMode = SslMode.Require;
                     builder.TrustServerCertificate = true;
