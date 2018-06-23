@@ -2,42 +2,83 @@
 using DataTransfer.Util;
 using Npgsql;
 using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace DataTransfer
 {
     public partial class MainForm : Form
     {
+        #region Transfer
+        private void Transfer()
+        {
+            SetStatusLabel("Connecting");
+            ProgressBar.Value = 0;
+            using (var srcConn = new NpgsqlConnection(SourceConnectionString))
+            using (var srcCmd = new NpgsqlCommand { Connection = srcConn })
+            using (var dstConn = new NpgsqlConnection(DestinationConnectionString))
+            using (var dstCmd = new NpgsqlCommand { Connection = dstConn })
+            {
+                srcConn.Open();
+                dstConn.Open();
+                SetStatusLabel("Connected");
+                var srcSchema = PgUtils.LoadSchema(srcCmd);
+                var dstSchema = PgUtils.LoadSchema(dstCmd);
+
+                ProgressBar.Maximum = dstSchema.NumOfEntity;
+                foreach (var dstEntity in dstSchema)
+                {
+                    var srcEntity = srcSchema.GetEntity(dstEntity.Name);
+
+                    ProgressBar.Value++;
+                    if (srcEntity == null)
+                    {
+                        continue;
+                    }
+                    SetStatusLabel($"Transfer[{dstEntity.Name}]");
+                    PgUtils.Transfer(dstCmd, dstEntity, srcCmd, srcEntity);
+                }
+            }
+            SetStatusLabel("Done.");
+        }
+
+        private void TransferButton_Click(object sender, EventArgs e)
+        {
+            Transfer();
+        }
+        #endregion
+
         #region Events
         private void SetStatusLabel(string text)
         {
             StatusLabel.Text = text;
-            StatusBar.Invalidate();
+            StatusBar.Refresh();
         }
 
         private bool TestConnection(string connectionString)
         {
             SetStatusLabel("Connecting");
-            using (var srcConn = new NpgsqlConnection(connectionString))
+            try
             {
-                srcConn.Open();
-                SetStatusLabel("Connected");
-
-                var srcTables = PgUtils.ListTables(srcConn);
-
-                foreach (var name in srcTables)
+                using (var conn = new NpgsqlConnection(connectionString))
+                using (var cmd = new NpgsqlCommand { Connection = conn })
                 {
-                    Debug.Print("name:" + name);
+                    conn.Open();
+                    SetStatusLabel("Connected");
                 }
             }
-            SetStatusLabel("Done.");
+            catch (Exception)
+            {
+                return false;
+            }
+            SetStatusLabel("Success.");
             return true;
         }
 
         private void TestSourceButton_Click(object sender, EventArgs e)
         {
-            TestConnection(SourceConnectionString);
+            if (TestConnection(SourceConnectionString))
+            {
+            }
         }
 
         private void TestDestinationButton_Click(object sender, EventArgs e)

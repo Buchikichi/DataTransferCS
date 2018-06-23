@@ -31,34 +31,35 @@
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.sourceGroupBox = new System.Windows.Forms.GroupBox();
-            this.TestSourceButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.DestinationGroupBox = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.TestDestinationButton = new System.Windows.Forms.Button();
-            this.DestinationSchemaTextBox = new System.Windows.Forms.TextBox();
-            this.DestinationTlsCheckBox = new System.Windows.Forms.CheckBox();
-            this.DestinationPasswordTextBox = new System.Windows.Forms.TextBox();
-            this.DestinationUserTextBox = new System.Windows.Forms.TextBox();
-            this.DestinationHostTextBox = new System.Windows.Forms.TextBox();
-            this.DestinationPort = new System.Windows.Forms.NumericUpDown();
             this.SourceSchemaTextBox = new System.Windows.Forms.TextBox();
             this.SourceTlsCheckBox = new System.Windows.Forms.CheckBox();
             this.SourcePasswordTextBox = new System.Windows.Forms.TextBox();
             this.SourceUserTextBox = new System.Windows.Forms.TextBox();
+            this.TestSourceButton = new System.Windows.Forms.Button();
             this.SourcePort = new System.Windows.Forms.NumericUpDown();
             this.SourceHostTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.DestinationGroupBox = new System.Windows.Forms.GroupBox();
+            this.TestDestinationButton = new System.Windows.Forms.Button();
+            this.DestinationSchemaTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.DestinationTlsCheckBox = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.DestinationPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.DestinationUserTextBox = new System.Windows.Forms.TextBox();
+            this.DestinationHostTextBox = new System.Windows.Forms.TextBox();
+            this.DestinationPort = new System.Windows.Forms.NumericUpDown();
+            this.TransferButton = new System.Windows.Forms.Button();
             this.StatusBar.SuspendLayout();
             this.sourceGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SourcePort)).BeginInit();
             this.DestinationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DestinationPort)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SourcePort)).BeginInit();
             this.SuspendLayout();
             // 
             // StatusBar
@@ -66,7 +67,7 @@
             this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel,
             this.toolStripStatusLabel1,
-            this.toolStripProgressBar1});
+            this.ProgressBar});
             this.StatusBar.Location = new System.Drawing.Point(0, 539);
             this.StatusBar.Name = "StatusBar";
             this.StatusBar.Size = new System.Drawing.Size(784, 22);
@@ -81,13 +82,13 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(667, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(636, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
-            // toolStripProgressBar1
+            // ProgressBar
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // sourceGroupBox
             // 
@@ -110,6 +111,46 @@
             this.sourceGroupBox.TabStop = false;
             this.sourceGroupBox.Text = "Source";
             // 
+            // SourceSchemaTextBox
+            // 
+            this.SourceSchemaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourceSchema", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SourceSchemaTextBox.Location = new System.Drawing.Point(80, 57);
+            this.SourceSchemaTextBox.Name = "SourceSchemaTextBox";
+            this.SourceSchemaTextBox.Size = new System.Drawing.Size(180, 26);
+            this.SourceSchemaTextBox.TabIndex = 9;
+            this.SourceSchemaTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceSchema;
+            // 
+            // SourceTlsCheckBox
+            // 
+            this.SourceTlsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SourceTlsCheckBox.AutoSize = true;
+            this.SourceTlsCheckBox.Checked = global::DataTransfer.Properties.Settings.Default.SourceTls;
+            this.SourceTlsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DataTransfer.Properties.Settings.Default, "SourceTls", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SourceTlsCheckBox.Location = new System.Drawing.Point(694, 27);
+            this.SourceTlsCheckBox.Name = "SourceTlsCheckBox";
+            this.SourceTlsCheckBox.Size = new System.Drawing.Size(60, 23);
+            this.SourceTlsCheckBox.TabIndex = 7;
+            this.SourceTlsCheckBox.Text = "TLS";
+            this.SourceTlsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // SourcePasswordTextBox
+            // 
+            this.SourcePasswordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourcePassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SourcePasswordTextBox.Location = new System.Drawing.Point(266, 89);
+            this.SourcePasswordTextBox.Name = "SourcePasswordTextBox";
+            this.SourcePasswordTextBox.Size = new System.Drawing.Size(402, 26);
+            this.SourcePasswordTextBox.TabIndex = 6;
+            this.SourcePasswordTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourcePassword;
+            // 
+            // SourceUserTextBox
+            // 
+            this.SourceUserTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourceUser", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SourceUserTextBox.Location = new System.Drawing.Point(80, 89);
+            this.SourceUserTextBox.Name = "SourceUserTextBox";
+            this.SourceUserTextBox.Size = new System.Drawing.Size(180, 26);
+            this.SourceUserTextBox.TabIndex = 5;
+            this.SourceUserTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceUser;
+            // 
             // TestSourceButton
             // 
             this.TestSourceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -120,6 +161,38 @@
             this.TestSourceButton.Text = "Test";
             this.TestSourceButton.UseVisualStyleBackColor = true;
             this.TestSourceButton.Click += new System.EventHandler(this.TestSourceButton_Click);
+            // 
+            // SourcePort
+            // 
+            this.SourcePort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SourcePort.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::DataTransfer.Properties.Settings.Default, "SourcePort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SourcePort.Location = new System.Drawing.Point(608, 25);
+            this.SourcePort.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.SourcePort.Minimum = new decimal(new int[] {
+            22,
+            0,
+            0,
+            0});
+            this.SourcePort.Name = "SourcePort";
+            this.SourcePort.Size = new System.Drawing.Size(80, 26);
+            this.SourcePort.TabIndex = 3;
+            this.SourcePort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.SourcePort.Value = global::DataTransfer.Properties.Settings.Default.SourcePort;
+            // 
+            // SourceHostTextBox
+            // 
+            this.SourceHostTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SourceHostTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourceHostName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SourceHostTextBox.Location = new System.Drawing.Point(80, 25);
+            this.SourceHostTextBox.Name = "SourceHostTextBox";
+            this.SourceHostTextBox.Size = new System.Drawing.Size(522, 26);
+            this.SourceHostTextBox.TabIndex = 2;
+            this.SourceHostTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceHostName;
             // 
             // label2
             // 
@@ -169,33 +242,6 @@
             this.DestinationGroupBox.TabStop = false;
             this.DestinationGroupBox.Text = "Destination";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 19);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Host:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 60);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 19);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Schema:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 93);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 19);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "User:";
-            // 
             // TestDestinationButton
             // 
             this.TestDestinationButton.Location = new System.Drawing.Point(674, 88);
@@ -215,6 +261,15 @@
             this.DestinationSchemaTextBox.TabIndex = 9;
             this.DestinationSchemaTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationSchema;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 19);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Host:";
+            // 
             // DestinationTlsCheckBox
             // 
             this.DestinationTlsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -228,6 +283,15 @@
             this.DestinationTlsCheckBox.Text = "TLS";
             this.DestinationTlsCheckBox.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 60);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 19);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Schema:";
+            // 
             // DestinationPasswordTextBox
             // 
             this.DestinationPasswordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "DestinationPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -236,6 +300,15 @@
             this.DestinationPasswordTextBox.Size = new System.Drawing.Size(402, 26);
             this.DestinationPasswordTextBox.TabIndex = 6;
             this.DestinationPasswordTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationPassword;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 93);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 19);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "User:";
             // 
             // DestinationUserTextBox
             // 
@@ -278,83 +351,25 @@
             this.DestinationPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.DestinationPort.Value = global::DataTransfer.Properties.Settings.Default.DestinationPort;
             // 
-            // SourceSchemaTextBox
+            // TransferButton
             // 
-            this.SourceSchemaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourceSchema", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SourceSchemaTextBox.Location = new System.Drawing.Point(80, 57);
-            this.SourceSchemaTextBox.Name = "SourceSchemaTextBox";
-            this.SourceSchemaTextBox.Size = new System.Drawing.Size(180, 26);
-            this.SourceSchemaTextBox.TabIndex = 9;
-            this.SourceSchemaTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceSchema;
-            // 
-            // SourceTlsCheckBox
-            // 
-            this.SourceTlsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SourceTlsCheckBox.AutoSize = true;
-            this.SourceTlsCheckBox.Checked = global::DataTransfer.Properties.Settings.Default.SourceTls;
-            this.SourceTlsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DataTransfer.Properties.Settings.Default, "SourceTls", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SourceTlsCheckBox.Location = new System.Drawing.Point(694, 27);
-            this.SourceTlsCheckBox.Name = "SourceTlsCheckBox";
-            this.SourceTlsCheckBox.Size = new System.Drawing.Size(60, 23);
-            this.SourceTlsCheckBox.TabIndex = 7;
-            this.SourceTlsCheckBox.Text = "TLS";
-            this.SourceTlsCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // SourcePasswordTextBox
-            // 
-            this.SourcePasswordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourcePassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SourcePasswordTextBox.Location = new System.Drawing.Point(266, 89);
-            this.SourcePasswordTextBox.Name = "SourcePasswordTextBox";
-            this.SourcePasswordTextBox.Size = new System.Drawing.Size(402, 26);
-            this.SourcePasswordTextBox.TabIndex = 6;
-            this.SourcePasswordTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourcePassword;
-            // 
-            // SourceUserTextBox
-            // 
-            this.SourceUserTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourceUser", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SourceUserTextBox.Location = new System.Drawing.Point(80, 89);
-            this.SourceUserTextBox.Name = "SourceUserTextBox";
-            this.SourceUserTextBox.Size = new System.Drawing.Size(180, 26);
-            this.SourceUserTextBox.TabIndex = 5;
-            this.SourceUserTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceUser;
-            // 
-            // SourcePort
-            // 
-            this.SourcePort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SourcePort.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::DataTransfer.Properties.Settings.Default, "SourcePort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SourcePort.Location = new System.Drawing.Point(608, 25);
-            this.SourcePort.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.SourcePort.Minimum = new decimal(new int[] {
-            22,
-            0,
-            0,
-            0});
-            this.SourcePort.Name = "SourcePort";
-            this.SourcePort.Size = new System.Drawing.Size(80, 26);
-            this.SourcePort.TabIndex = 3;
-            this.SourcePort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.SourcePort.Value = global::DataTransfer.Properties.Settings.Default.SourcePort;
-            // 
-            // SourceHostTextBox
-            // 
-            this.SourceHostTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SourceHostTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourceHostName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SourceHostTextBox.Location = new System.Drawing.Point(80, 25);
-            this.SourceHostTextBox.Name = "SourceHostTextBox";
-            this.SourceHostTextBox.Size = new System.Drawing.Size(522, 26);
-            this.SourceHostTextBox.TabIndex = 2;
-            this.SourceHostTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceHostName;
+            this.TransferButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TransferButton.BackColor = System.Drawing.Color.PaleGreen;
+            this.TransferButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TransferButton.Location = new System.Drawing.Point(676, 510);
+            this.TransferButton.Name = "TransferButton";
+            this.TransferButton.Size = new System.Drawing.Size(96, 26);
+            this.TransferButton.TabIndex = 3;
+            this.TransferButton.Text = "Transfer";
+            this.TransferButton.UseVisualStyleBackColor = false;
+            this.TransferButton.Click += new System.EventHandler(this.TransferButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.TransferButton);
             this.Controls.Add(this.DestinationGroupBox);
             this.Controls.Add(this.sourceGroupBox);
             this.Controls.Add(this.StatusBar);
@@ -368,10 +383,10 @@
             this.StatusBar.PerformLayout();
             this.sourceGroupBox.ResumeLayout(false);
             this.sourceGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SourcePort)).EndInit();
             this.DestinationGroupBox.ResumeLayout(false);
             this.DestinationGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DestinationPort)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SourcePort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,7 +408,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripProgressBar ProgressBar;
         private System.Windows.Forms.GroupBox DestinationGroupBox;
         private System.Windows.Forms.Button TestDestinationButton;
         private System.Windows.Forms.TextBox DestinationSchemaTextBox;
@@ -405,6 +420,7 @@
         private System.Windows.Forms.TextBox DestinationUserTextBox;
         private System.Windows.Forms.TextBox DestinationHostTextBox;
         private System.Windows.Forms.NumericUpDown DestinationPort;
+        private System.Windows.Forms.Button TransferButton;
     }
 }
 
