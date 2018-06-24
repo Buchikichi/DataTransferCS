@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
 
 namespace DataTransfer.Util
@@ -35,6 +36,38 @@ namespace DataTransfer.Util
             return list;
         }
 
+        private static string BuildValues(Dictionary<string, object> dict)
+        {
+            var list = new List<string>();
+
+            foreach (var key in dict.Keys)
+            {
+                var value = dict[key];
+
+                if (value is int i)
+                {
+                    list.Add(i.ToString());
+                }
+                else
+                {
+                    list.Add($"'{value}'");
+                }
+            }
+            return string.Join(",", list);
+        }
+
+        private static bool Insert(DbCommand cmd, Entity entity, Dictionary<string, object> dict)
+        {
+            var table = entity.Name;
+            var columns = string.Join(",", dict.Keys);
+            var values = BuildValues(dict);
+            var query = $"INSERT INTO {table}({columns}) values({values})";
+
+            Debug.Print(query);
+            cmd.CommandText = query;
+            return true;
+        }
+
         public static void Transfer(DbCommand dstCmd, Entity dstEntity, DbCommand srcCmd, Entity srcEntity)
         {
             var attrList = new List<Attribute>();
@@ -50,9 +83,13 @@ namespace DataTransfer.Util
             }
             var list = SelectSource(srcCmd, srcEntity.Name, attrList);
 
+            if (list.Count == 0)
+            {
+                return;
+            }
             foreach (var dict in list)
             {
-
+                Insert(dstCmd, dstEntity, dict);
             }
         }
 
