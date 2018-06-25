@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Diagnostics;
 using System.Linq;
 
 namespace DataTransfer.Util
@@ -63,8 +62,11 @@ namespace DataTransfer.Util
             var values = BuildValues(dict);
             var query = $"INSERT INTO {table}({columns}) values({values})";
 
-            Debug.Print(query);
             cmd.CommandText = query;
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
             return true;
         }
 

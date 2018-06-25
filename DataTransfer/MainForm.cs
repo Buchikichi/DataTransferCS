@@ -56,34 +56,41 @@ namespace DataTransfer
 
         private bool TestConnection(string connectionString)
         {
-            SetStatusLabel("Connecting");
             try
             {
                 using (var conn = new NpgsqlConnection(connectionString))
                 using (var cmd = new NpgsqlCommand { Connection = conn })
                 {
                     conn.Open();
-                    SetStatusLabel("Connected");
                 }
             }
             catch (Exception)
             {
                 return false;
             }
-            SetStatusLabel("Success.");
             return true;
         }
 
         private void TestSourceButton_Click(object sender, EventArgs e)
         {
-            if (TestConnection(SourceConnectionString))
+            SetStatusLabel("Connecting...");
+            if (!TestConnection(SourceConnectionString))
             {
+                SetStatusLabel("Failed.");
+                return;
             }
+            SetStatusLabel("Success.");
         }
 
         private void TestDestinationButton_Click(object sender, EventArgs e)
         {
-            TestConnection(DestinationConnectionString);
+            SetStatusLabel("Connecting...");
+            if (!TestConnection(DestinationConnectionString))
+            {
+                SetStatusLabel("Failed.");
+                return;
+            }
+            SetStatusLabel("Success.");
         }
         #endregion
 
