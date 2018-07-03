@@ -8,18 +8,32 @@ namespace DataTransfer.IO
 {
     class DDLWriter
     {
-        private string BuildAttribute(EntityInfo entity)
+        private string BuildAttribute(AttributeInfo attr)
+        {
+            var list = new List<string>();
+            var type = attr.Type;
+
+            list.Add(attr.Name);
+            if (!string.IsNullOrEmpty(attr.Size))
+            {
+                type += $"({attr.Size})";
+            }
+            list.Add(type);
+            if (attr.NotNull)
+            {
+                list.Add("NOT NULL");
+            }
+            return string.Join(" ", list);
+        }
+
+        private string BuildColumns(EntityInfo entity)
         {
             var list = new List<string>();
             var pk = new List<string>();
 
             foreach (var attr in entity)
             {
-                var buff = new StringBuilder();
-
-                buff.Append("  ");
-                buff.Append(attr.Name);
-                list.Add(buff.ToString());
+                list.Add("  " + BuildAttribute(attr));
                 if (attr.Pk)
                 {
                     pk.Add(attr.Name);
@@ -39,11 +53,11 @@ namespace DataTransfer.IO
             var table = entity.Name;
             var list = new List<string>
             {
-                $"COMMENT ON TABLE {table} IS '{entity.Comment}';"
+                $"COMMENT ON TABLE {table} IS '{entity.Description}';"
             };
             foreach (var attr in entity)
             {
-                list.Add($"COMMENT ON TABLE {table}.{attr.Name} IS '{attr.Comment}';");
+                list.Add($"COMMENT ON TABLE {table}.{attr.Name} IS '{attr.Description}';");
             }
             return string.Join("\n", list);
         }
@@ -55,7 +69,7 @@ namespace DataTransfer.IO
 
             buff.Append($"-- DROP TABLE {table} CASCADE;\n");
             buff.Append($"CREATE TABLE {table} (\n");
-            buff.Append(BuildAttribute(entity));
+            buff.Append(BuildColumns(entity));
             buff.Append("\n);\n");
             buff.Append(BuildComment(entity));
             buff.Append("\n");

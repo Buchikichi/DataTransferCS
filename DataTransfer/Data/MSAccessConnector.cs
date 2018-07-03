@@ -37,7 +37,7 @@ namespace DataTransfer.Data
                 {
                     Schema = schema,
                     Name = row["TABLE_NAME"].ToString(),
-                    Comment = row["Description"].ToString(),
+                    Description = row["Description"].ToString(),
                 });
             }
         }

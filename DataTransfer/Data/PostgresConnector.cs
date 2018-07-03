@@ -13,6 +13,33 @@ namespace DataTransfer.Data
             return new SchemaInfo { Name = DEFAULT_SCHEMA };
         }
 
+        protected override string BuildColumnListQuery(EntityInfo entity)
+        {
+            return $@"
+SELECT
+  COL.column_name,
+  COL.udt_name,
+  COL.character_maximum_length,
+  COL.is_nullable,
+  COL.column_default,
+  COALESCE(DSC.description, '') as description
+FROM
+  pg_class PGC
+INNER JOIN information_schema.columns COL ON
+  PGC.relname = COL.table_name
+INNER JOIN pg_attribute ATT ON
+  PGC.oid = ATT.attrelid
+  AND COL.column_name = ATT.attname
+LEFT JOIN pg_description DSC ON
+  ATT.attrelid = DSC.objoid
+  AND ATT.attnum = DSC.objsubid
+WHERE
+  PGC.relname = '{entity.Name}'
+ORDER BY
+  COL.ordinal_position
+";
+        }
+
         protected override string BuildTableListQuery(SchemaInfo schema)
         {
             return $@"

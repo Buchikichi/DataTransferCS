@@ -14,7 +14,7 @@ namespace DataTransfer.Data
 
         public SchemaInfo Schema { get; set; }
         public string Name { get; set; }
-        public string Comment { get; set; }
+        public string Description { get; set; }
         #endregion
 
         public void Add(AttributeInfo attr)

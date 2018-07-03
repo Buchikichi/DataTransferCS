@@ -95,7 +95,7 @@ namespace DataTransfer
 
                     foreach (var entity in schema)
                     {
-                        Debug.Print(entity.Name + ":" + entity.Comment);
+                        Debug.Print(entity.Name + ":" + entity.Description);
                     }
                 }
             }

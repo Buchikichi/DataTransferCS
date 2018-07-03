@@ -11,26 +11,37 @@ namespace DataTransfer.Data
             return new SchemaInfo();
         }
 
+        protected virtual string BuildColumnListQuery(EntityInfo entity)
+        {
+            var schema = entity.Schema.Name;
+            var tableName = entity.Name;
+
+            return "SELECT *, '' as description FROM information_schema.columns"
+                + $" WHERE table_schema = '{schema}' AND table_name = '{tableName}'"
+                + " ORDER BY table_name, ordinal_position";
+        }
+
         /// <summary>
         /// カラム一覧を取得.
         /// </summary>
         /// <param name="entity">エンティティ情報</param>
         protected virtual void ListColumns(EntityInfo entity)
         {
-            var schema = entity.Schema.Name;
-            var tableName = entity.Name;
-            var query = "SELECT * FROM information_schema.columns"
-                + $" WHERE table_schema = '{schema}' AND table_name = '{tableName}'"
-                + " ORDER BY table_name, ordinal_position";
-
-            Command.CommandText = query;
+            Command.CommandText = BuildColumnListQuery(entity);
             using (var reader = Command.ExecuteReader())
             {
                 foreach (IDataRecord rec in reader)
                 {
+                    var nullable = rec["is_nullable"].ToString().ToUpper();
+
                     entity.Add(new AttributeInfo
                     {
-                        Name = (string)rec["column_name"],
+                        Name = rec["column_name"].ToString(),
+                        Type = rec["udt_name"].ToString(),
+                        Size = rec["character_maximum_length"].ToString(),
+                        NotNull = "NO" == nullable,
+                        DefaultValue = rec["column_default"].ToString(),
+                        Description = rec["description"].ToString(),
                     });
                 }
             }
@@ -58,7 +69,7 @@ namespace DataTransfer.Data
                     {
                         Schema = schema,
                         Name = (string)rec["table_name"],
-                        Comment = (string)rec["description"],
+                        Description = (string)rec["description"],
                     });
                 }
             }
