@@ -1,10 +1,21 @@
-﻿using Npgsql;
+﻿using DataTransfer.Data;
+using Npgsql;
 using System.Data.Common;
 
 namespace DataTransfer.DB
 {
     public class PostgresConnector : DbConnector
     {
+        public const string DEFAULT_SCHEMA = "public";
+
+        #region Methods
+        protected override SchemaInfo CreateSchemaInfo()
+        {
+            return new SchemaInfo { Name = DEFAULT_SCHEMA };
+        }
+        #endregion
+
+        #region Begin/End
         protected override DbConnection CreateDbConnection()
         {
             var builder = new NpgsqlConnectionStringBuilder
@@ -28,7 +39,6 @@ namespace DataTransfer.DB
             return new NpgsqlCommand { Connection = (NpgsqlConnection)Connection };
         }
 
-        #region Begin/End
         public PostgresConnector(ConnectionInfo info) : base(info) { }
         #endregion
     }

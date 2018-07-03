@@ -1,6 +1,6 @@
 ﻿namespace DataTransfer.Data
 {
-    class Attribute
+    public class AttributeInfo
     {
         public string Name { get; set; }
     }

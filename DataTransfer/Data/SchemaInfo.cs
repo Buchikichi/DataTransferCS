@@ -3,23 +3,23 @@ using System.Collections.Generic;
 
 namespace DataTransfer.Data
 {
-    class Schema : IEnumerable<Entity>
+    public class SchemaInfo : IEnumerable<EntityInfo>
     {
         #region Attributes
-        private List<Entity> list = new List<Entity>();
-        private Dictionary<string, Entity> dict = new Dictionary<string, Entity>();
+        private List<EntityInfo> list = new List<EntityInfo>();
+        private Dictionary<string, EntityInfo> dict = new Dictionary<string, EntityInfo>();
 
         public string Name { get; set; }
         public int NumOfEntity => list.Count;
         #endregion
 
-        public void Add(Entity entity)
+        public void Add(EntityInfo entity)
         {
             list.Add(entity);
             dict.Add(entity.Name, entity);
         }
 
-        public Entity GetEntity(string tableName)
+        public EntityInfo GetEntity(string tableName)
         {
             if (!dict.ContainsKey(tableName))
             {
@@ -28,7 +28,7 @@ namespace DataTransfer.Data
             return dict[tableName];
         }
 
-        public IEnumerator<Entity> GetEnumerator()
+        public IEnumerator<EntityInfo> GetEnumerator()
         {
             return list.GetEnumerator();
         }

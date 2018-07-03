@@ -8,7 +8,7 @@
 
             if (type == ConnectionType.MSAccess)
             {
-
+                return new MSAccessConnector(info);
             }
             if (type == ConnectionType.PostgreSQL)
             {

@@ -1,9 +1,7 @@
 ﻿using DataTransfer.DB;
 using DataTransfer.Properties;
 using DataTransfer.Util;
-using Npgsql;
 using System;
-using System.Data.OleDb;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -14,22 +12,14 @@ namespace DataTransfer
         #region Transfer
         private void Transfer()
         {
-            var cn = new OleDbConnection();
-            var comm = new OleDbCommand();
-
-            PgUtils.LoadSchema(comm);
             SetStatusLabel("Connecting");
             ProgressBar.Value = 0;
-            using (var srcConn = new NpgsqlConnection(SourceConnectionString))
-            using (var srcCmd = new NpgsqlCommand { Connection = srcConn })
-            using (var dstConn = new NpgsqlConnection(DestinationConnectionString))
-            using (var dstCmd = new NpgsqlCommand { Connection = dstConn })
+            using (var srcDb = DbConnectorFactory.Create(SourceConnectionInfo))
+            using (var dstDb = DbConnectorFactory.Create(SourceConnectionInfo))
             {
-                srcConn.Open();
-                dstConn.Open();
                 SetStatusLabel("Connected");
-                var srcSchema = PgUtils.LoadSchema(srcCmd);
-                var dstSchema = PgUtils.LoadSchema(dstCmd);
+                var srcSchema = srcDb.LoadSchema();
+                var dstSchema = dstDb.LoadSchema();
 
                 ProgressBar.Maximum = dstSchema.NumOfEntity;
                 foreach (var dstEntity in dstSchema)
@@ -42,7 +32,7 @@ namespace DataTransfer
                         continue;
                     }
                     SetStatusLabel($"Transfer[{dstEntity.Name}]");
-                    PgUtils.Transfer(dstCmd, dstEntity, srcCmd, srcEntity);
+                    PgUtils.Transfer(dstDb.Command, dstEntity, srcDb.Command, srcEntity);
                 }
             }
             SetStatusLabel("Done.");
@@ -67,17 +57,17 @@ namespace DataTransfer
             {
                 using (var db = DbConnectorFactory.Create(info))
                 {
-                    var schema = PgUtils.LoadSchema(db.Command);
+                    var schema = db.LoadSchema();
 
-                    Debug.Print(SourceConnectionInfo.Type.ToString());
                     foreach (var entity in schema)
                     {
-                        Debug.Print(entity.Name);
+                        Debug.Print(entity.Name + ":" + entity.Comment);
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MessageBox.Show(e.Message, "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -153,48 +143,6 @@ namespace DataTransfer
                     Password = Settings.Default.DestinationPassword,
                     Tls = DestinationTlsCheckBox.Checked,
                 };
-            }
-        }
-
-        private string SourceConnectionString
-        {
-            get
-            {
-                var builder = new NpgsqlConnectionStringBuilder
-                {
-                    Host = Settings.Default.SourceHostName,
-                    Port = (int)Settings.Default.SourcePort,
-                    Database = Settings.Default.SourceSchema,
-                    Username = Settings.Default.SourceUser,
-                    Password = Settings.Default.SourcePassword,
-                };
-                if (SourceTlsCheckBox.Checked)
-                {
-                    builder.SslMode = SslMode.Require;
-                    builder.TrustServerCertificate = true;
-                }
-                return builder.ToString();
-            }
-        }
-
-        private string DestinationConnectionString
-        {
-            get
-            {
-                var builder = new NpgsqlConnectionStringBuilder
-                {
-                    Host = Settings.Default.DestinationHostName,
-                    Port = (int)Settings.Default.DestinationPort,
-                    Database = Settings.Default.DestinationSchema,
-                    Username = Settings.Default.DestinationUser,
-                    Password = Settings.Default.DestinationPassword,
-                };
-                if (DestinationTlsCheckBox.Checked)
-                {
-                    builder.SslMode = SslMode.Require;
-                    builder.TrustServerCertificate = true;
-                }
-                return builder.ToString();
             }
         }
         #endregion
