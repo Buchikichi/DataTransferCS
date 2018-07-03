@@ -1,7 +1,10 @@
-﻿using DataTransfer.Properties;
+﻿using DataTransfer.DB;
+using DataTransfer.Properties;
 using DataTransfer.Util;
 using Npgsql;
 using System;
+using System.Data.OleDb;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace DataTransfer
@@ -11,6 +14,10 @@ namespace DataTransfer
         #region Transfer
         private void Transfer()
         {
+            var cn = new OleDbConnection();
+            var comm = new OleDbCommand();
+
+            PgUtils.LoadSchema(comm);
             SetStatusLabel("Connecting");
             ProgressBar.Value = 0;
             using (var srcConn = new NpgsqlConnection(SourceConnectionString))
@@ -54,14 +61,19 @@ namespace DataTransfer
             StatusBar.Refresh();
         }
 
-        private bool TestConnection(string connectionString)
+        private bool TestConnection(ConnectionInfo info)
         {
             try
             {
-                using (var conn = new NpgsqlConnection(connectionString))
-                using (var cmd = new NpgsqlCommand { Connection = conn })
+                using (var db = DbConnectorFactory.Create(info))
                 {
-                    conn.Open();
+                    var schema = PgUtils.LoadSchema(db.Command);
+
+                    Debug.Print(SourceConnectionInfo.Type.ToString());
+                    foreach (var entity in schema)
+                    {
+                        Debug.Print(entity.Name);
+                    }
                 }
             }
             catch (Exception)
@@ -74,7 +86,7 @@ namespace DataTransfer
         private void TestSourceButton_Click(object sender, EventArgs e)
         {
             SetStatusLabel("Connecting...");
-            if (!TestConnection(SourceConnectionString))
+            if (!TestConnection(SourceConnectionInfo))
             {
                 SetStatusLabel("Failed.");
                 return;
@@ -85,7 +97,7 @@ namespace DataTransfer
         private void TestDestinationButton_Click(object sender, EventArgs e)
         {
             SetStatusLabel("Connecting...");
-            if (!TestConnection(DestinationConnectionString))
+            if (!TestConnection(DestinationConnectionInfo))
             {
                 SetStatusLabel("Failed.");
                 return;
@@ -97,17 +109,53 @@ namespace DataTransfer
         #region Begin/End
         private void Initialize()
         {
+            ConnectionTypeUtil.SetupComboBox(SourceTypeComboBox);
+            ConnectionTypeUtil.SetupComboBox(DestinationTypeComboBox);
             FormClosing += (sender, e) => Settings.Default.Save();
         }
 
         public MainForm()
         {
             InitializeComponent();
-            Initialize();
+            Load += (sender, e) => Initialize();
         }
         #endregion
 
         #region Attributes
+        private ConnectionInfo SourceConnectionInfo
+        {
+            get
+            {
+                return new ConnectionInfo
+                {
+                    Type = (ConnectionType)SourceTypeComboBox.SelectedItem,
+                    Host = Settings.Default.SourceHostName,
+                    Port = (int)Settings.Default.SourcePort,
+                    Schema = Settings.Default.SourceSchema,
+                    Username = Settings.Default.SourceUser,
+                    Password = Settings.Default.SourcePassword,
+                    Tls = SourceTlsCheckBox.Checked,
+                };
+            }
+        }
+
+        private ConnectionInfo DestinationConnectionInfo
+        {
+            get
+            {
+                return new ConnectionInfo
+                {
+                    Type = (ConnectionType)DestinationTypeComboBox.SelectedItem,
+                    Host = Settings.Default.DestinationHostName,
+                    Port = (int)Settings.Default.DestinationPort,
+                    Schema = Settings.Default.DestinationSchema,
+                    Username = Settings.Default.DestinationUser,
+                    Password = Settings.Default.DestinationPassword,
+                    Tls = DestinationTlsCheckBox.Checked,
+                };
+            }
+        }
+
         private string SourceConnectionString
         {
             get

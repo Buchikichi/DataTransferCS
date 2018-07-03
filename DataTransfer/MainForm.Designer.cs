@@ -33,6 +33,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.sourceGroupBox = new System.Windows.Forms.GroupBox();
+            this.SourceTypeComboBox = new System.Windows.Forms.ComboBox();
             this.SourceSchemaTextBox = new System.Windows.Forms.TextBox();
             this.SourceTlsCheckBox = new System.Windows.Forms.CheckBox();
             this.SourcePasswordTextBox = new System.Windows.Forms.TextBox();
@@ -55,6 +56,7 @@
             this.DestinationHostTextBox = new System.Windows.Forms.TextBox();
             this.DestinationPort = new System.Windows.Forms.NumericUpDown();
             this.TransferButton = new System.Windows.Forms.Button();
+            this.DestinationTypeComboBox = new System.Windows.Forms.ComboBox();
             this.StatusBar.SuspendLayout();
             this.sourceGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SourcePort)).BeginInit();
@@ -82,7 +84,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(636, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(667, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // ProgressBar
@@ -94,6 +96,7 @@
             // 
             this.sourceGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.sourceGroupBox.Controls.Add(this.SourceTypeComboBox);
             this.sourceGroupBox.Controls.Add(this.SourceSchemaTextBox);
             this.sourceGroupBox.Controls.Add(this.SourceTlsCheckBox);
             this.sourceGroupBox.Controls.Add(this.SourcePasswordTextBox);
@@ -111,13 +114,23 @@
             this.sourceGroupBox.TabStop = false;
             this.sourceGroupBox.Text = "Source";
             // 
+            // SourceTypeComboBox
+            // 
+            this.SourceTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SourceTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SourceTypeComboBox.FormattingEnabled = true;
+            this.SourceTypeComboBox.Location = new System.Drawing.Point(608, 56);
+            this.SourceTypeComboBox.Name = "SourceTypeComboBox";
+            this.SourceTypeComboBox.Size = new System.Drawing.Size(146, 27);
+            this.SourceTypeComboBox.TabIndex = 5;
+            // 
             // SourceSchemaTextBox
             // 
             this.SourceSchemaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "SourceSchema", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.SourceSchemaTextBox.Location = new System.Drawing.Point(80, 57);
             this.SourceSchemaTextBox.Name = "SourceSchemaTextBox";
             this.SourceSchemaTextBox.Size = new System.Drawing.Size(180, 26);
-            this.SourceSchemaTextBox.TabIndex = 9;
+            this.SourceSchemaTextBox.TabIndex = 4;
             this.SourceSchemaTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceSchema;
             // 
             // SourceTlsCheckBox
@@ -129,7 +142,7 @@
             this.SourceTlsCheckBox.Location = new System.Drawing.Point(694, 27);
             this.SourceTlsCheckBox.Name = "SourceTlsCheckBox";
             this.SourceTlsCheckBox.Size = new System.Drawing.Size(60, 23);
-            this.SourceTlsCheckBox.TabIndex = 7;
+            this.SourceTlsCheckBox.TabIndex = 3;
             this.SourceTlsCheckBox.Text = "TLS";
             this.SourceTlsCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -139,7 +152,7 @@
             this.SourcePasswordTextBox.Location = new System.Drawing.Point(266, 89);
             this.SourcePasswordTextBox.Name = "SourcePasswordTextBox";
             this.SourcePasswordTextBox.Size = new System.Drawing.Size(402, 26);
-            this.SourcePasswordTextBox.TabIndex = 6;
+            this.SourcePasswordTextBox.TabIndex = 7;
             this.SourcePasswordTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourcePassword;
             // 
             // SourceUserTextBox
@@ -148,7 +161,7 @@
             this.SourceUserTextBox.Location = new System.Drawing.Point(80, 89);
             this.SourceUserTextBox.Name = "SourceUserTextBox";
             this.SourceUserTextBox.Size = new System.Drawing.Size(180, 26);
-            this.SourceUserTextBox.TabIndex = 5;
+            this.SourceUserTextBox.TabIndex = 6;
             this.SourceUserTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceUser;
             // 
             // TestSourceButton
@@ -157,7 +170,7 @@
             this.TestSourceButton.Location = new System.Drawing.Point(674, 89);
             this.TestSourceButton.Name = "TestSourceButton";
             this.TestSourceButton.Size = new System.Drawing.Size(80, 26);
-            this.TestSourceButton.TabIndex = 4;
+            this.TestSourceButton.TabIndex = 8;
             this.TestSourceButton.Text = "Test";
             this.TestSourceButton.UseVisualStyleBackColor = true;
             this.TestSourceButton.Click += new System.EventHandler(this.TestSourceButton_Click);
@@ -179,7 +192,7 @@
             0});
             this.SourcePort.Name = "SourcePort";
             this.SourcePort.Size = new System.Drawing.Size(80, 26);
-            this.SourcePort.TabIndex = 3;
+            this.SourcePort.TabIndex = 2;
             this.SourcePort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.SourcePort.Value = global::DataTransfer.Properties.Settings.Default.SourcePort;
             // 
@@ -191,7 +204,7 @@
             this.SourceHostTextBox.Location = new System.Drawing.Point(80, 25);
             this.SourceHostTextBox.Name = "SourceHostTextBox";
             this.SourceHostTextBox.Size = new System.Drawing.Size(522, 26);
-            this.SourceHostTextBox.TabIndex = 2;
+            this.SourceHostTextBox.TabIndex = 1;
             this.SourceHostTextBox.Text = global::DataTransfer.Properties.Settings.Default.SourceHostName;
             // 
             // label2
@@ -225,6 +238,7 @@
             // 
             this.DestinationGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationGroupBox.Controls.Add(this.DestinationTypeComboBox);
             this.DestinationGroupBox.Controls.Add(this.TestDestinationButton);
             this.DestinationGroupBox.Controls.Add(this.DestinationSchemaTextBox);
             this.DestinationGroupBox.Controls.Add(this.label4);
@@ -247,7 +261,7 @@
             this.TestDestinationButton.Location = new System.Drawing.Point(674, 88);
             this.TestDestinationButton.Name = "TestDestinationButton";
             this.TestDestinationButton.Size = new System.Drawing.Size(80, 26);
-            this.TestDestinationButton.TabIndex = 10;
+            this.TestDestinationButton.TabIndex = 8;
             this.TestDestinationButton.Text = "Test";
             this.TestDestinationButton.UseVisualStyleBackColor = true;
             this.TestDestinationButton.Click += new System.EventHandler(this.TestDestinationButton_Click);
@@ -258,7 +272,7 @@
             this.DestinationSchemaTextBox.Location = new System.Drawing.Point(80, 57);
             this.DestinationSchemaTextBox.Name = "DestinationSchemaTextBox";
             this.DestinationSchemaTextBox.Size = new System.Drawing.Size(180, 26);
-            this.DestinationSchemaTextBox.TabIndex = 9;
+            this.DestinationSchemaTextBox.TabIndex = 4;
             this.DestinationSchemaTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationSchema;
             // 
             // label4
@@ -279,7 +293,7 @@
             this.DestinationTlsCheckBox.Location = new System.Drawing.Point(694, 27);
             this.DestinationTlsCheckBox.Name = "DestinationTlsCheckBox";
             this.DestinationTlsCheckBox.Size = new System.Drawing.Size(60, 23);
-            this.DestinationTlsCheckBox.TabIndex = 7;
+            this.DestinationTlsCheckBox.TabIndex = 3;
             this.DestinationTlsCheckBox.Text = "TLS";
             this.DestinationTlsCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -298,7 +312,7 @@
             this.DestinationPasswordTextBox.Location = new System.Drawing.Point(266, 89);
             this.DestinationPasswordTextBox.Name = "DestinationPasswordTextBox";
             this.DestinationPasswordTextBox.Size = new System.Drawing.Size(402, 26);
-            this.DestinationPasswordTextBox.TabIndex = 6;
+            this.DestinationPasswordTextBox.TabIndex = 7;
             this.DestinationPasswordTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationPassword;
             // 
             // label6
@@ -316,7 +330,7 @@
             this.DestinationUserTextBox.Location = new System.Drawing.Point(80, 89);
             this.DestinationUserTextBox.Name = "DestinationUserTextBox";
             this.DestinationUserTextBox.Size = new System.Drawing.Size(180, 26);
-            this.DestinationUserTextBox.TabIndex = 5;
+            this.DestinationUserTextBox.TabIndex = 6;
             this.DestinationUserTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationUser;
             // 
             // DestinationHostTextBox
@@ -327,7 +341,7 @@
             this.DestinationHostTextBox.Location = new System.Drawing.Point(80, 25);
             this.DestinationHostTextBox.Name = "DestinationHostTextBox";
             this.DestinationHostTextBox.Size = new System.Drawing.Size(522, 26);
-            this.DestinationHostTextBox.TabIndex = 2;
+            this.DestinationHostTextBox.TabIndex = 1;
             this.DestinationHostTextBox.Text = global::DataTransfer.Properties.Settings.Default.DestinationHostName;
             // 
             // DestinationPort
@@ -347,7 +361,7 @@
             0});
             this.DestinationPort.Name = "DestinationPort";
             this.DestinationPort.Size = new System.Drawing.Size(80, 26);
-            this.DestinationPort.TabIndex = 3;
+            this.DestinationPort.TabIndex = 2;
             this.DestinationPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.DestinationPort.Value = global::DataTransfer.Properties.Settings.Default.DestinationPort;
             // 
@@ -363,6 +377,16 @@
             this.TransferButton.Text = "Transfer";
             this.TransferButton.UseVisualStyleBackColor = false;
             this.TransferButton.Click += new System.EventHandler(this.TransferButton_Click);
+            // 
+            // DestinationTypeComboBox
+            // 
+            this.DestinationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DestinationTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DestinationTypeComboBox.FormattingEnabled = true;
+            this.DestinationTypeComboBox.Location = new System.Drawing.Point(608, 57);
+            this.DestinationTypeComboBox.Name = "DestinationTypeComboBox";
+            this.DestinationTypeComboBox.Size = new System.Drawing.Size(146, 27);
+            this.DestinationTypeComboBox.TabIndex = 5;
             // 
             // MainForm
             // 
@@ -421,6 +445,8 @@
         private System.Windows.Forms.TextBox DestinationHostTextBox;
         private System.Windows.Forms.NumericUpDown DestinationPort;
         private System.Windows.Forms.Button TransferButton;
+        private System.Windows.Forms.ComboBox SourceTypeComboBox;
+        private System.Windows.Forms.ComboBox DestinationTypeComboBox;
     }
 }
 
