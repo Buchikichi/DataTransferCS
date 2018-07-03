@@ -14,10 +14,7 @@ namespace DataTransfer.Data
         /// <summary>
         /// カラム一覧を取得.
         /// </summary>
-        /// <param name="cmd"></param>
-        /// <param name="tableName"></param>
-        /// <param name="schema"></param>
-        /// <returns></returns>
+        /// <param name="entity">エンティティ情報</param>
         protected virtual void ListColumns(EntityInfo entity)
         {
             var schema = entity.Schema.Name;
@@ -41,11 +38,15 @@ namespace DataTransfer.Data
 
         protected virtual string BuildTableListQuery(SchemaInfo schema)
         {
-            return "SELECT * FROM information_schema.tables"
+            return "SELECT table_name, '' as description FROM information_schema.tables"
                 + $" WHERE table_schema = '{schema.Name}' AND table_type='BASE TABLE'"
                 + " ORDER BY table_name";
         }
 
+        /// <summary>
+        /// テーブル一覧を取得
+        /// </summary>
+        /// <param name="schema">スキーマ情報</param>
         protected virtual void ListTables(SchemaInfo schema)
         {
             Command.CommandText = BuildTableListQuery(schema);
@@ -57,6 +58,7 @@ namespace DataTransfer.Data
                     {
                         Schema = schema,
                         Name = (string)rec["table_name"],
+                        Comment = (string)rec["description"],
                     });
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using DataTransfer.Data;
+using DataTransfer.IO;
 using DataTransfer.Properties;
 using DataTransfer.Util;
 using System;
@@ -41,6 +42,39 @@ namespace DataTransfer
         private void TransferButton_Click(object sender, EventArgs e)
         {
             Transfer();
+        }
+        #endregion
+
+        #region DDL
+        private void SaveDDL(ConnectionInfo info)
+        {
+            SetStatusLabel("Connecting...");
+            try
+            {
+                using (var db = DbConnectorFactory.Create(info))
+                {
+                    var schema = db.LoadSchema();
+                    var writer = new DDLWriter();
+
+                    writer.Save(Settings.Default.WorkingDirectory, schema);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            SetStatusLabel("Success.");
+        }
+
+        private void SourceDdlButton_Click(object sender, EventArgs e)
+        {
+            SaveDDL(SourceConnectionInfo);
+        }
+
+        private void DestinationDdlButton_Click(object sender, EventArgs e)
+        {
+            SaveDDL(DestinationConnectionInfo);
         }
         #endregion
 

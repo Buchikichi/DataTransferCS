@@ -33,6 +33,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.sourceGroupBox = new System.Windows.Forms.GroupBox();
+            this.SourceDdlButton = new System.Windows.Forms.Button();
             this.SourceTypeComboBox = new System.Windows.Forms.ComboBox();
             this.SourceSchemaTextBox = new System.Windows.Forms.TextBox();
             this.SourceTlsCheckBox = new System.Windows.Forms.CheckBox();
@@ -45,6 +46,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.DestinationGroupBox = new System.Windows.Forms.GroupBox();
+            this.DestinationDdlButton = new System.Windows.Forms.Button();
+            this.DestinationTypeComboBox = new System.Windows.Forms.ComboBox();
             this.TestDestinationButton = new System.Windows.Forms.Button();
             this.DestinationSchemaTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -56,7 +59,8 @@
             this.DestinationHostTextBox = new System.Windows.Forms.TextBox();
             this.DestinationPort = new System.Windows.Forms.NumericUpDown();
             this.TransferButton = new System.Windows.Forms.Button();
-            this.DestinationTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.WorkingDirectoryTextBox = new System.Windows.Forms.TextBox();
             this.StatusBar.SuspendLayout();
             this.sourceGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SourcePort)).BeginInit();
@@ -96,6 +100,7 @@
             // 
             this.sourceGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.sourceGroupBox.Controls.Add(this.SourceDdlButton);
             this.sourceGroupBox.Controls.Add(this.SourceTypeComboBox);
             this.sourceGroupBox.Controls.Add(this.SourceSchemaTextBox);
             this.sourceGroupBox.Controls.Add(this.SourceTlsCheckBox);
@@ -109,13 +114,27 @@
             this.sourceGroupBox.Controls.Add(this.label1);
             this.sourceGroupBox.Location = new System.Drawing.Point(12, 12);
             this.sourceGroupBox.Name = "sourceGroupBox";
-            this.sourceGroupBox.Size = new System.Drawing.Size(760, 125);
+            this.sourceGroupBox.Size = new System.Drawing.Size(760, 160);
             this.sourceGroupBox.TabIndex = 1;
             this.sourceGroupBox.TabStop = false;
             this.sourceGroupBox.Text = "Source";
             // 
+            // SourceDdlButton
+            // 
+            this.SourceDdlButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SourceDdlButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SourceDdlButton.Location = new System.Drawing.Point(634, 121);
+            this.SourceDdlButton.Name = "SourceDdlButton";
+            this.SourceDdlButton.Size = new System.Drawing.Size(120, 26);
+            this.SourceDdlButton.TabIndex = 9;
+            this.SourceDdlButton.TabStop = false;
+            this.SourceDdlButton.Text = "Create DDL";
+            this.SourceDdlButton.UseVisualStyleBackColor = true;
+            this.SourceDdlButton.Click += new System.EventHandler(this.SourceDdlButton_Click);
+            // 
             // SourceTypeComboBox
             // 
+            this.SourceTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SourceTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SourceTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SourceTypeComboBox.FormattingEnabled = true;
@@ -167,6 +186,7 @@
             // TestSourceButton
             // 
             this.TestSourceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TestSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TestSourceButton.Location = new System.Drawing.Point(674, 89);
             this.TestSourceButton.Name = "TestSourceButton";
             this.TestSourceButton.Size = new System.Drawing.Size(80, 26);
@@ -238,6 +258,7 @@
             // 
             this.DestinationGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationGroupBox.Controls.Add(this.DestinationDdlButton);
             this.DestinationGroupBox.Controls.Add(this.DestinationTypeComboBox);
             this.DestinationGroupBox.Controls.Add(this.TestDestinationButton);
             this.DestinationGroupBox.Controls.Add(this.DestinationSchemaTextBox);
@@ -249,15 +270,41 @@
             this.DestinationGroupBox.Controls.Add(this.DestinationUserTextBox);
             this.DestinationGroupBox.Controls.Add(this.DestinationHostTextBox);
             this.DestinationGroupBox.Controls.Add(this.DestinationPort);
-            this.DestinationGroupBox.Location = new System.Drawing.Point(12, 143);
+            this.DestinationGroupBox.Location = new System.Drawing.Point(12, 178);
             this.DestinationGroupBox.Name = "DestinationGroupBox";
-            this.DestinationGroupBox.Size = new System.Drawing.Size(760, 151);
+            this.DestinationGroupBox.Size = new System.Drawing.Size(760, 160);
             this.DestinationGroupBox.TabIndex = 2;
             this.DestinationGroupBox.TabStop = false;
             this.DestinationGroupBox.Text = "Destination";
             // 
+            // DestinationDdlButton
+            // 
+            this.DestinationDdlButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationDdlButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DestinationDdlButton.Location = new System.Drawing.Point(634, 120);
+            this.DestinationDdlButton.Name = "DestinationDdlButton";
+            this.DestinationDdlButton.Size = new System.Drawing.Size(120, 26);
+            this.DestinationDdlButton.TabIndex = 9;
+            this.DestinationDdlButton.TabStop = false;
+            this.DestinationDdlButton.Text = "Create DDL";
+            this.DestinationDdlButton.UseVisualStyleBackColor = true;
+            this.DestinationDdlButton.Click += new System.EventHandler(this.DestinationDdlButton_Click);
+            // 
+            // DestinationTypeComboBox
+            // 
+            this.DestinationTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DestinationTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DestinationTypeComboBox.FormattingEnabled = true;
+            this.DestinationTypeComboBox.Location = new System.Drawing.Point(608, 57);
+            this.DestinationTypeComboBox.Name = "DestinationTypeComboBox";
+            this.DestinationTypeComboBox.Size = new System.Drawing.Size(146, 27);
+            this.DestinationTypeComboBox.TabIndex = 5;
+            // 
             // TestDestinationButton
             // 
+            this.TestDestinationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TestDestinationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TestDestinationButton.Location = new System.Drawing.Point(674, 88);
             this.TestDestinationButton.Name = "TestDestinationButton";
             this.TestDestinationButton.Size = new System.Drawing.Size(80, 26);
@@ -378,21 +425,36 @@
             this.TransferButton.UseVisualStyleBackColor = false;
             this.TransferButton.Click += new System.EventHandler(this.TransferButton_Click);
             // 
-            // DestinationTypeComboBox
+            // label7
             // 
-            this.DestinationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.DestinationTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DestinationTypeComboBox.FormattingEnabled = true;
-            this.DestinationTypeComboBox.Location = new System.Drawing.Point(608, 57);
-            this.DestinationTypeComboBox.Name = "DestinationTypeComboBox";
-            this.DestinationTypeComboBox.Size = new System.Drawing.Size(146, 27);
-            this.DestinationTypeComboBox.TabIndex = 5;
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 514);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(76, 19);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Working:";
+            // 
+            // WorkingDirectoryTextBox
+            // 
+            this.WorkingDirectoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WorkingDirectoryTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DataTransfer.Properties.Settings.Default, "WorkingDirectory", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.WorkingDirectoryTextBox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.WorkingDirectoryTextBox.Location = new System.Drawing.Point(90, 513);
+            this.WorkingDirectoryTextBox.Name = "WorkingDirectoryTextBox";
+            this.WorkingDirectoryTextBox.Size = new System.Drawing.Size(580, 23);
+            this.WorkingDirectoryTextBox.TabIndex = 5;
+            this.WorkingDirectoryTextBox.TabStop = false;
+            this.WorkingDirectoryTextBox.Text = global::DataTransfer.Properties.Settings.Default.WorkingDirectory;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.WorkingDirectoryTextBox);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.TransferButton);
             this.Controls.Add(this.DestinationGroupBox);
             this.Controls.Add(this.sourceGroupBox);
@@ -447,6 +509,10 @@
         private System.Windows.Forms.Button TransferButton;
         private System.Windows.Forms.ComboBox SourceTypeComboBox;
         private System.Windows.Forms.ComboBox DestinationTypeComboBox;
+        private System.Windows.Forms.Button SourceDdlButton;
+        private System.Windows.Forms.Button DestinationDdlButton;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox WorkingDirectoryTextBox;
     }
 }
 

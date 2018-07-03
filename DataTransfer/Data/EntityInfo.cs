@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace DataTransfer.Data
 {
+    /// <summary>
+    /// エンティティ情報.
+    /// </summary>
    public class EntityInfo : IEnumerable<AttributeInfo>
     {
         #region Attributes

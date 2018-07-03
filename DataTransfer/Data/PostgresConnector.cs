@@ -12,6 +12,25 @@ namespace DataTransfer.Data
         {
             return new SchemaInfo { Name = DEFAULT_SCHEMA };
         }
+
+        protected override string BuildTableListQuery(SchemaInfo schema)
+        {
+            return $@"
+SELECT
+  table_name,
+  COALESCE(DSC.description, '') as description
+FROM
+  information_schema.tables TAB
+INNER JOIN pg_class PGC ON
+  TAB.table_name = PGC.relname
+LEFT JOIN pg_description DSC ON
+  PGC.oid = DSC.objoid
+  AND DSC.objsubid = 0
+WHERE
+  table_schema = '{schema.Name}'
+  AND table_type='BASE TABLE'
+";
+        }
         #endregion
 
         #region Begin/End
