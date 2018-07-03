@@ -1,10 +1,9 @@
-﻿using DataTransfer.Data;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.OleDb;
 
-namespace DataTransfer.DB
+namespace DataTransfer.Data
 {
-    public class MSAccessConnector : DbConnector
+    class MSAccessConnector : DbConnector<OleDbConnection>
     {
         private const string OLE_PROVIDER = "Microsoft.Ace.OLEDB.16.0";
 
@@ -12,8 +11,7 @@ namespace DataTransfer.DB
         protected override void ListColumns(EntityInfo entity)
         {
             var schema = entity.Schema.Name;
-            var conn = (OleDbConnection)Connection;
-            var schemaTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, entity.Name, null });
+            var schemaTable = Connection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, entity.Name, null });
 
             for (var rowNum = 0; rowNum < schemaTable.Rows.Count; rowNum++)
             {
@@ -29,8 +27,7 @@ namespace DataTransfer.DB
 
         protected override void ListTables(SchemaInfo schema)
         {
-            var conn = (OleDbConnection)Connection;
-            var schemaTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+            var schemaTable = Connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
 
             for (var rowNum = 0; rowNum < schemaTable.Rows.Count; rowNum++)
             {
@@ -47,7 +44,7 @@ namespace DataTransfer.DB
         #endregion
 
         #region Begin/End
-        protected override DbConnection CreateDbConnection()
+        protected override OleDbConnection CreateDbConnection()
         {
             var builder = new OleDbConnectionStringBuilder
             {
@@ -59,7 +56,7 @@ namespace DataTransfer.DB
 
         protected override DbCommand CreateDbCommand()
         {
-            return new OleDbCommand { Connection = (OleDbConnection)Connection };
+            return new OleDbCommand { Connection = Connection };
         }
 
         public MSAccessConnector(ConnectionInfo info) : base(info) { }

@@ -1,4 +1,4 @@
-﻿using DataTransfer.DB;
+﻿using DataTransfer.Data;
 using DataTransfer.Properties;
 using DataTransfer.Util;
 using System;

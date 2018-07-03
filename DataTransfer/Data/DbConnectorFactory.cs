@@ -1,8 +1,8 @@
-﻿namespace DataTransfer.DB
+﻿namespace DataTransfer.Data
 {
     class DbConnectorFactory
     {
-        public static DbConnector Create(ConnectionInfo info)
+        public static IDbConnector Create(ConnectionInfo info)
         {
             var type = info.Type;
 

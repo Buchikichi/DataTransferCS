@@ -1,4 +1,4 @@
-﻿namespace DataTransfer.DB
+﻿namespace DataTransfer.Data
 {
     public class ConnectionInfo
     {

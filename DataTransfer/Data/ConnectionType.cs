@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DataTransfer.DB
+namespace DataTransfer.Data
 {
     public enum ConnectionType
     {

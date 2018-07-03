@@ -1,11 +1,9 @@
-﻿using DataTransfer.Data;
-using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
 
-namespace DataTransfer.DB
+namespace DataTransfer.Data
 {
-    public abstract class DbConnector : IDisposable
+    abstract class DbConnector<T> : IDbConnector where T : DbConnection
     {
         #region Methods
         protected virtual SchemaInfo CreateSchemaInfo()
@@ -78,7 +76,7 @@ namespace DataTransfer.DB
         #endregion
 
         #region Begin/End
-        protected abstract DbConnection CreateDbConnection();
+        protected abstract T CreateDbConnection();
 
         protected abstract DbCommand CreateDbCommand();
 
@@ -98,7 +96,7 @@ namespace DataTransfer.DB
 
         #region Attributes
         protected readonly ConnectionInfo _info;
-        protected DbConnection Connection { get; set; }
+        protected T Connection { get; set; }
         public DbCommand Command { get; set; }
         #endregion
     }
